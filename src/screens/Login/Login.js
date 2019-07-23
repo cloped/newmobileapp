@@ -5,8 +5,10 @@ import {
   Layout,
   Text,
   Button,
-  Input,
 } from 'react-native-ui-kitten';
+import {
+  Input,
+} from '../../components/commons';
 
 const styles = StyleSheet.create({
   infoWrapper: {
@@ -16,11 +18,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
   },
-  inputLabel: {
-    fontWeight: 'bold',
-    marginTop: 8,
-    marginBottom: 3,
-  },
   buttonLogin: {
     marginTop: 10,
     width: '100%',
@@ -28,6 +25,9 @@ const styles = StyleSheet.create({
   registryText: {
     marginTop: 10,
     alignSelf: 'center',
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
   loader: {
     position: 'absolute',
@@ -68,21 +68,19 @@ const Login = (props) => {
   return (
     <Fragment>
       <Layout style={styles.infoWrapper}>
-        <Text style={styles.inputLabel}>
-          Usuário
-        </Text>
         <Input
           value={username}
           onChangeText={setUsername}
           placeholder='Digite seu usuário'
+          size='small'
+          label='Usuário'
         />
-        <Text style={styles.inputLabel}>
-          Senha
-        </Text>
         <Input
           value={password}
           onChangeText={setPassword}
           placeholder='Digite sua senha'
+          size='small'
+          label='Senha'
           secureTextEntry
         />
         <Button
@@ -95,7 +93,7 @@ const Login = (props) => {
 
         <Text style={styles.registryText} category='c1'>
           Ainda não possui uma conta?
-          <Text category='s2'> Cadastre-se</Text>
+          <Text style={styles.boldText} category='c1'> Cadastre-se</Text>
         </Text>
 
         {isLoading ? <ActivityIndicator style={styles.loader} size={50} color='#3365FE' /> : null}
@@ -104,7 +102,7 @@ const Login = (props) => {
       <Layout style={styles.footer}>
         <Text category='c1'>
           Esqueceu seus dados de login?
-          <Text category='s2'> Recupere sua senha</Text>
+          <Text style={styles.boldText} category='c1'> Recupere sua senha</Text>
         </Text>
       </Layout>
     </Fragment>

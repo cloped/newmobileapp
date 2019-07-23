@@ -1,8 +1,15 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout, Text, Button } from 'react-native-ui-kitten';
+import {
+  Layout,
+  Text,
+  Button,
+} from 'react-native-ui-kitten';
 import { CardIOModule } from 'react-native-awesome-card-io';
+
+import {
+  Input,
+} from './commons';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,29 +17,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
-    marginVertical: 16,
-  },
 });
 
 const CreditCardForm = () => {
-  const scanCard = () => {
-    console.debug(CardIOModule);
+  const [cardNumber, setCardNumber] = useState(undefined);
+  const [cardSecurityCode, setCardSecurityCode] = useState(undefined);
 
+  const scanCard = () => {
     CardIOModule
       .scanCard()
       .then((card) => {
-        // the scanned card
-        console.debug('card:', card);
+        setCardNumber(card.cardNumber);
+        setCardSecurityCode(card.cvv);
       })
       .catch(() => {
-        // the user cancelled
       });
   };
 
   return (
     <Layout style={styles.container}>
-      <Text style={styles.text} category='h4'>Welcome to CreditCardForm</Text>
+      <Text category='h4'>Welcome to CreditCardForm</Text>
+      <Input
+        value={cardNumber}
+        onChangeText={setCardNumber}
+        placeholder='Número do cartão'
+      />
+      <Input
+        value={cardSecurityCode}
+        onChangeText={setCardSecurityCode}
+        placeholder='Código de segurança'
+      />
       <Button onPress={scanCard}>
         Escanear cartão
       </Button>

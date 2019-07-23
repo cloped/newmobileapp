@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React from 'react';
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -8,36 +8,36 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation';
 
-import Home from '../screens/Home';
-import Profile from '../screens/Profile';
+import Home from '../screens/Home/Home';
+import ProfileNavigator from './ProfileNavigator';
+// import Operations from '../screens/Operations';
 
-class BottomNavigationShowcase extends Component {
-  onTabSelect = (selectedIndex) => {
-    const { navigation } = this.props;
+const BottomNavigationShowcase = (props) => {
+  const { navigation } = props;
+
+  const onTabSelect = (selectedIndex) => {
     const { [selectedIndex]: selectedRoute } = navigation.state.routes;
 
     navigation.navigate(selectedRoute.routeName);
   };
 
-  render() {
-    const { navigation } = this.props;
-
-    return (
-      <BottomNavigation
-        selectedIndex={navigation.state.index}
-        onSelect={this.onTabSelect}
-      >
-        <BottomNavigationTab title='Home' />
-        <BottomNavigationTab title='Perfil' />
-      </BottomNavigation>
-    );
-  }
+  return (
+    <BottomNavigation
+      selectedIndex={navigation.state.index}
+      onSelect={onTabSelect}
+    >
+      <BottomNavigationTab title='Home' />
+      {/* <BottomNavigationTab title='Operações' /> */}
+      <BottomNavigationTab title='Perfil' />
+    </BottomNavigation>
+  );
 };
 
 const TabNavigatorScreen = createBottomTabNavigator(
   {
     Home,
-    Profile,
+    // Operations,
+    ProfileNavigator,
   }, {
     initialRouteName: 'Home',
     tabBarComponent: BottomNavigationShowcase,

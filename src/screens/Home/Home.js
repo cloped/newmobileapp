@@ -27,7 +27,7 @@ const Home = () => (
     <Layout>
       <Text style={styles.text} category='h4'>Henrique Wildes</Text>
     </Layout>
-    <Avatar style={styles.avatar} source={require('../../assets/empty-profile.png')} />
+    <Avatar style={styles.avatar} source={require('../../../assets/empty-profile.png')} />
     <QRCode
       value='1234123123123123562'
       size={200}
